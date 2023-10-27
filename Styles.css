@@ -1,0 +1,31 @@
+
+#imageLogo {
+
+    height: 6rem;
+}
+
+.carousel-item {
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    height: auto;
+}
+  
+.card-columns .card {
+
+    display: inline-block;
+}
+  
+.card-img-top {
+
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.miTarjeta {
+
+    height: 400px;
+}
