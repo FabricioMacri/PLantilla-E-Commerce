@@ -4,72 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <body>
+</head>
+<body>
 
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">
+            <!-- Columna lateral con categorías -->
             <div class="col-md-3">
-                <!-- Columna de categorías -->
-                <h4>Categorías</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">Categoría 1</li>
-                    <li class="list-group-item">Categoría 2</li>
-                    <li class="list-group-item">Categoría 3</li>
-                    <!-- Agrega más categorías aquí -->
-                </ul>
-            </div>
-            <div class="col-md-9">
-                <!-- Contenedor con tarjetas -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 1</h5>
-                                <p class="card-text">Contenido de la tarjeta 1.</p>
+                <div class="accordion" id="categorias">
+                    <!-- Categoría 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="categoria1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#contenidoCategoria1">
+                                Tecnología
+                            </button>
+                        </h2>
+                        <div id="contenidoCategoria1" class="accordion-collapse collapse show" aria-labelledby="categoria1">
+                            <div class="accordion-body">
+                                <!-- Contenido de Categoría 1 -->
+                                <ul>
+                                    <li>Computadoras</li>
+                                    <li>Telefonos</li>
+                                    <li>Accesorios</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 2</h5>
-                                <p class="card-text">Contenido de la tarjeta 2.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Tarjeta 3</h5>
-                                <p class="card-text">Contenido de la tarjeta 3.</p>
+
+                    <!-- Categoría 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="categoria2">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#contenidoCategoria2">
+                                Categoría 2
+                            </button>
+                        </h2>
+                        <div id="contenidoCategoria2" class="accordion-collapse collapse" aria-labelledby="categoria2">
+                            <div class="accordion-body">
+                                <!-- Contenido de Categoría 2 -->
+                                <ul>
+                                    <li>Elemento A</li>
+                                    <li>Elemento B</li>
+                                    <li>Elemento C</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <div class="col-md-9">
+                <!-- Aquí puedes agregar el contenido principal de tu página. -->
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card mb-4">
+                            <img src="./image/pc.jpg" alt="">
                             <div class="card-body">
-                                <h5 class="card-title">Tarjeta 4</h5>
-                                <p class="card-text">Contenido de la tarjeta 4.</p>
+                                <p class="card-text text-muted">Computadoras</p>
+                                <h5 class="card-title">HP Omen 15</h5>
+                                <p class="card-text">HP OMEN i5 7th gen GTX 1050 16GB RAM</p>
+                                <p class="card-text">$250000</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card mb-4">
+                            <img src="./image/tel.png" alt="100">
                             <div class="card-body">
-                                <h5 class="card-title">Tarjeta 5</h5>
-                                <p class="card-text">Contenido de la tarjeta 5.</p>
+                                <p class="card-text text-muted">Telefonos</p>
+                                <h5 class="card-title">Iphone 15 Pro Max</h5>
+                                <p class="card-text">Iphone 15 Pro Max 256Gb Titanio + Funda + Cargador</p>
+                                <p class="card-text">$100000</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card mb-4">
+                            <img src="./image/auri.png" alt="100">
                             <div class="card-body">
-                                <h5 class="card-title">Tarjeta 6</h5>
-                                <p class="card-text">Contenido de la tarjeta 6.</p>
+                                <p class="card-text text-muted">Accesorios</p>
+                                <h5 class="card-title">Logitech G733</h5>
+                                <p class="card-text">Headset Gamer Logitech G733 Lightspeed Wireless</p>
+                                <p class="card-text">$80000</p>
                             </div>
                         </div>
                     </div>
@@ -77,7 +95,9 @@
             </div>
         </div>
     </div>
+
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
