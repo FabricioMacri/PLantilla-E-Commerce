@@ -9,6 +9,18 @@
 </head>
 <body>
 
+    <header>
+        <nav class="navbar navbar-light bg-light" style="margin-bottom: 20px;">
+            <div class="container-fluid">
+              <a class="navbar-brand">Navbar</a>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="¿Que estas buscando?" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+              </form>
+            </div>
+          </nav>
+    </header>
+
     <div class="container">
         <div class="row">
             <!-- Columna lateral con categorías -->
@@ -22,14 +34,12 @@
                             </button>
                         </h2>
                         <div id="contenidoCategoria1" class="accordion-collapse collapse show" aria-labelledby="categoria1">
-                            <div class="accordion-body">
-                                <!-- Contenido de Categoría 1 -->
-                                <ul>
-                                    <li>Computadoras</li>
-                                    <li>Telefonos</li>
-                                    <li>Accesorios</li>
-                                </ul>
-                            </div>
+                           
+                              <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">Computadoras</a>
+                                <a href="#" class="list-group-item list-group-item-action">Telefonos</a>
+                                <a href="#" class="list-group-item list-group-item-action">Accesorios</a>
+                              </div>
                         </div>
                     </div>
 
