@@ -56,7 +56,7 @@ function makeItem (id, url, categoria, nombre, descripcion, precio) {
 
 
 
-fetch('http://localhost:9000/api', {mode: 'cors'})
+fetch('http://localhost:9000/items', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
@@ -69,6 +69,48 @@ fetch('http://localhost:9000/api', {mode: 'cors'})
         const container = document.getElementById('contenedorProductos');
         const row = document.createElement('div');
         row.classList.add("row");
+        row.id = "allItems";
+        container.appendChild(row);
+
+        data.forEach(element => {
+            
+            if (contador == 0) {
+
+                const row = document.createElement('div');
+                row.classList.add("row");
+                container.appendChild(row);
+            }
+            const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);
+            row.appendChild(newItem);
+            contador = contador +1;
+            if(contador == 3)  contador = 0; 
+            
+        });
+
+    })
+    .catch(function(error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Parece que hubo un problema, intente mas tarde.'
+          })
+        console.log(error);
+    });
+
+fetch('http://localhost:9000/categories', {mode: 'cors'})
+.then(function(response) {
+    return response.json();
+    })
+    .then(function(data) {
+        
+        console.log(data);
+        
+        let contador = 0;
+
+        const container = document.getElementById('contenedorProductos');
+        const row = document.createElement('div');
+        row.classList.add("row");
+        row.id = "allItems";
         container.appendChild(row);
 
         data.forEach(element => {
