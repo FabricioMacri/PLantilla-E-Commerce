@@ -104,29 +104,12 @@ fetch('http://localhost:9000/categories', {mode: 'cors'})
     .then(function(data) {
         
         console.log(data);
-        
-        let contador = 0;
 
-        const container = document.getElementById('contenedorProductos');
-        const row = document.createElement('div');
-        row.classList.add("row");
-        row.id = "allItems";
-        container.appendChild(row);
-
-        data.forEach(element => {
-            
-            if (contador == 0) {
-
-                const row = document.createElement('div');
-                row.classList.add("row");
-                container.appendChild(row);
-            }
-            const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);
-            row.appendChild(newItem);
-            contador = contador +1;
-            if(contador == 3)  contador = 0; 
-            
-        });
+        let result = data.filter((item,index)=>{
+            return data.indexOf(item) === index;
+        })
+        //hacer que las categorias se agreguen solas
+        //ahi arriba tenes la lista ya filtrada perrito, dale hacela corta
 
     })
     .catch(function(error) {
