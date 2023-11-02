@@ -54,7 +54,56 @@ function makeItem (id, url, categoria, nombre, descripcion, precio) {
     
 }
 
+function makeCategory(categoria, subCategorias) {
 
+    const accordion = document.createElement("div");
+    const header = document.createElement("h2");
+    const btn = document.createElement("button");
+    const collapse = document.createElement("div");
+    const group = document.createElement("div");
+
+    accordion.classList.add("accordion-item");
+    header.classList.add("accordion-header");
+    btn.classList.add("accordion-button");
+    collapse.collapse.add("accordion-collapse");
+    collapse.collapse.add("collapse");
+    collapse.collapse.add("show");
+    group.collapse.add("list-group");
+
+    btn.setAttribute("type", "button");
+    btn.setAttribute("data-bs-toggle", "collapse");
+    btn.setAttribute("data-bs-target", categoria);
+    btn.id = "btn" + categoria;
+
+    collapse.setAttribute("aria-labelledby", categoria);
+
+    subCategorias.forEach((element) => {
+
+        const newCat = document.createElement("a");
+        newCat.collapse.add("list-group-item");
+        newCat.collapse.add("list-group-item-action");
+        newCat.textContent = element;
+        //newCat.setAttribute("href", categoria);
+    })
+}
+/*
+<div class="accordion-item" id="contenidoCategoria1">
+    <h2 class="accordion-header" id="contenidoCategoria1">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#categoria1">
+            Tecnología
+        </button>
+    </h2>
+    <div id="categoria1" class="accordion-collapse collapse show" aria-labelledby="categoria1">
+                           
+        <div class="list-group">
+                                
+            <a href="#" class="list-group-item list-group-item-action">Computadoras</a>
+            <a href="#" class="list-group-item list-group-item-action">Telefonos</a>
+            <a href="#" class="list-group-item list-group-item-action">Accesorios</a>
+        </div>
+    </div>
+</div>
+*/
 
 fetch('http://localhost:9000/items', {mode: 'cors'})
     .then(function(response) {
@@ -97,7 +146,7 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
         console.log(error);
     });
 
-fetch('http://localhost:9000/categories', {mode: 'cors'})
+fetch('http://localhost:9000/search/categories', {mode: 'cors'})
 .then(function(response) {
     return response.json();
     })
@@ -105,9 +154,21 @@ fetch('http://localhost:9000/categories', {mode: 'cors'})
         
         console.log(data);
 
-        let result = data.filter((item,index)=>{
-            return data.indexOf(item) === index;
+        const categorias = data.map((el) => el.category)
+
+        categorias.forEach((element) => {
+
+            let aux = [];
+
+            data.forEach((subElement) => {
+
+                if (subElement.category == element) aux.push(subElement.subCategory)
+            })
+            makeCategory(element, aux);
+
         })
+
+        console.log(result);
         //hacer que las categorias se agreguen solas
         //ahi arriba tenes la lista ya filtrada perrito, dale hacela corta
 
