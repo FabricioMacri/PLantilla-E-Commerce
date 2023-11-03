@@ -72,6 +72,22 @@ function makeCategory(categoria, subCategorias) {
         newCat.classList.add("list-group-item-action");
         newCat.textContent = element;
         newCat.setAttribute("type", "button");
+        if (element == "Ver todos") {
+
+            newCat.addEventListener("click", () => {
+
+                filterCategory(categoria, undefined);
+            })
+        }
+        else {
+
+            newCat.addEventListener("click", () => {
+
+                filterCategory(categoria, element);
+            })
+
+        }
+        
         group.appendChild(newCat);
     })
 
@@ -96,12 +112,22 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
         row.id = "allItems";
         container.appendChild(row);
 
-        data.forEach(element => {
+        let reference = localStorage.getItem("reference");
+
+        if (reference == undefined){
+            data.forEach(element => {
             
-            const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);
-            row.appendChild(newItem);            
+                const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);
+                row.appendChild(newItem);            
             
-        });
+            });
+        }
+        else {
+            let aux = localStorage.getItem("reference");
+            filterCategory(undefined, undefined, aux);
+            localStorage.setItem("reference", "undefined");
+            
+        }
 
     })
     .catch(function(error) {
@@ -118,7 +144,7 @@ fetch('http://localhost:9000/search/categories', {mode: 'cors'})
     return response.json();
     })
     .then(function(data) {
-        
+
         const rawCategorias = data.map((el) => el.category);
 
         let categorias = rawCategorias.filter((item,index)=>{
@@ -127,9 +153,16 @@ fetch('http://localhost:9000/search/categories', {mode: 'cors'})
 
         const container = document.getElementById("categorias");
 
+        const allCat = document.getElementById("verTodo");
+
+        allCat.addEventListener("click", () => {
+
+            filterCategory(undefined, undefined);
+        })
+
         categorias.forEach((element) => {
 
-            let aux = [];
+            let aux = ["Ver todos"];
 
             data.forEach((subElement) => {
 

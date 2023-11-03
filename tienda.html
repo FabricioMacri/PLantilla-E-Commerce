@@ -12,10 +12,10 @@
     <header>
         <nav class="navbar navbar-light bg-light" style="margin-bottom: 20px;">
             <div class="container-fluid">
-              <a class="navbar-brand">Mi empresa</a>
+              <a class="navbar-brand" href="./index.html">Mi empresa</a>
               <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="¿Que estas buscando?" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                <input id="reference" class="form-control me-2" type="search" placeholder="¿Que estas buscando?" aria-label="Search">
+                <button id="buscador" class="btn btn-outline-success" type="button">Buscar</button>
               </form>
             </div>
           </nav>
@@ -25,12 +25,16 @@
         <div class="row">
             <!-- Columna lateral con categorías -->
             <div class="col-md-3">
-                <div class="accordion" id="categorias"> </div>
+                <div class="accordion" id="categorias">
+                    
+                    <a id="verTodo" class="list-group-item list-group-item-action" type="button" >
+                        Todos los productos
+                    </a>
+                </div>
             </div>
 
             <!-- Contenido Principal -->
             <div id="contenedorProductos" class="col-md-9">
-                
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 
-async function filterCategory(category, subCategory) {
+async function filterCategory(category, subCategory, reference) {
 
     fetch('http://localhost:9000/items', {mode: 'cors'})
         .then(function(response) {
@@ -10,12 +10,16 @@ async function filterCategory(category, subCategory) {
             const container = document.getElementById('contenedorProductos');
 
             const aux = document.getElementById('allItems');
-            container.removeChild(aux);
+            if (aux != null) container.removeChild(aux);
+            else container.removeChild(container.lastChild);
+            
 
             const row = document.createElement('div');
             row.classList.add("row");
-            row.id = category + "Items";
             container.appendChild(row);
+            
+            if (category == undefined && subCategory == undefined) row.id = "allItems";
+            else row.id = category + "Items";
 
             data.forEach(element => {
             
@@ -24,7 +28,17 @@ async function filterCategory(category, subCategory) {
                 || (element.category == category && subCategory == element.subCategory) ) {
                     const newItem = makeItem(element.ID, element.img, element.subCategory, element.name, element.description, element.price);
                     row.appendChild(newItem);
-                    
+                }
+                
+                if ((category == undefined && subCategory == undefined) && (reference == undefined)) {
+                    const newItem = makeItem(element.ID, element.img, element.subCategory, element.name, element.description, element.price);
+                    row.appendChild(newItem);
+                }
+                if ((category == undefined && subCategory == undefined) && (reference != undefined)) {
+                    if (element.name.toUpperCase().includes(reference.toUpperCase())) {
+                        const newItem = makeItem(element.ID, element.img, element.subCategory, element.name, element.description, element.price);
+                        row.appendChild(newItem);
+                    }
                 }
             });
 
@@ -38,3 +52,21 @@ async function filterCategory(category, subCategory) {
             console.log(error);
         });
 }
+
+const buscador = document.getElementById("buscador");
+
+const reference = document.getElementById("reference");
+
+reference.addEventListener("input", () => {
+
+    localStorage.setItem("reference", reference.value);
+    
+})
+
+buscador.addEventListener("click", () => {
+
+    let aux = localStorage.getItem("reference");
+    filterCategory(undefined, undefined, aux);
+    localStorage.setItem("reference", "undefined");
+    reference.value = "";
+})
