@@ -1,18 +1,4 @@
-/*
-                    Cada uno de estos por tarjeta y un row por cada fila
-                    
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <img src="./image/pc.jpg" alt="">
-                            <div class="card-body">
-                                <p class="card-text text-muted">Computadoras</p>
-                                <h5 class="card-title">HP Omen 15</h5>
-                                <p class="card-text">HP OMEN i5 7th gen GTX 1050 16GB RAM</p>
-                                <p class="card-text">$250000</p>
-                            </div>
-                        </div>
-                    </div>
-*/
+
 
 function makeItem (id, url, categoria, nombre, descripcion, precio) {
 
@@ -65,54 +51,45 @@ function makeCategory(categoria, subCategorias) {
     accordion.classList.add("accordion-item");
     header.classList.add("accordion-header");
     btn.classList.add("accordion-button");
-    collapse.collapse.add("accordion-collapse");
-    collapse.collapse.add("collapse");
-    collapse.collapse.add("show");
-    group.collapse.add("list-group");
+    collapse.classList.add("accordion-collapse");
+    collapse.classList.add("collapse");
+    collapse.classList.add("show");
+    group.classList.add("list-group");
 
     btn.setAttribute("type", "button");
     btn.setAttribute("data-bs-toggle", "collapse");
-    btn.setAttribute("data-bs-target", categoria);
+    btn.setAttribute("data-bs-target", "#" + categoria);
     btn.id = "btn" + categoria;
+    btn.textContent = categoria;
 
     collapse.setAttribute("aria-labelledby", categoria);
+    collapse.id = categoria;
 
     subCategorias.forEach((element) => {
 
         const newCat = document.createElement("a");
-        newCat.collapse.add("list-group-item");
-        newCat.collapse.add("list-group-item-action");
+        newCat.classList.add("list-group-item");
+        newCat.classList.add("list-group-item-action");
         newCat.textContent = element;
-        //newCat.setAttribute("href", categoria);
+        newCat.setAttribute("href", "#");
+        group.appendChild(newCat);
     })
+
+    accordion.appendChild(header);
+    header.appendChild(btn);
+    accordion.appendChild(collapse);
+    collapse.appendChild(group);
+
+    return accordion;
 }
-/*
-<div class="accordion-item" id="contenidoCategoria1">
-    <h2 class="accordion-header" id="contenidoCategoria1">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#categoria1">
-            Tecnología
-        </button>
-    </h2>
-    <div id="categoria1" class="accordion-collapse collapse show" aria-labelledby="categoria1">
-                           
-        <div class="list-group">
-                                
-            <a href="#" class="list-group-item list-group-item-action">Computadoras</a>
-            <a href="#" class="list-group-item list-group-item-action">Telefonos</a>
-            <a href="#" class="list-group-item list-group-item-action">Accesorios</a>
-        </div>
-    </div>
-</div>
-*/
+
 
 fetch('http://localhost:9000/items', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
     .then(function(data) {
-        
-        console.log(data);
-        
+                
         let contador = 0;
 
         const container = document.getElementById('contenedorProductos');
@@ -152,9 +129,13 @@ fetch('http://localhost:9000/search/categories', {mode: 'cors'})
     })
     .then(function(data) {
         
-        console.log(data);
+        const rawCategorias = data.map((el) => el.category);
 
-        const categorias = data.map((el) => el.category)
+        let categorias = rawCategorias.filter((item,index)=>{
+            return rawCategorias.indexOf(item) === index;
+        })
+
+        const container = document.getElementById("categorias");
 
         categorias.forEach((element) => {
 
@@ -164,21 +145,18 @@ fetch('http://localhost:9000/search/categories', {mode: 'cors'})
 
                 if (subElement.category == element) aux.push(subElement.subCategory)
             })
-            makeCategory(element, aux);
+            let cat = makeCategory(element, aux);
+
+            container.appendChild(cat);
 
         })
-
-        console.log(result);
-        //hacer que las categorias se agreguen solas
-        //ahi arriba tenes la lista ya filtrada perrito, dale hacela corta
-
     })
     .catch(function(error) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Parece que hubo un problema, intente mas tarde.'
-          })
+        })
         console.log(error);
     });
 
