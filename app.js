@@ -1,4 +1,4 @@
-
+// Generadores HTML para la tienda de categorias y productos
 
 function makeItem (id, url, categoria, nombre, descripcion, precio) {
 
@@ -71,7 +71,7 @@ function makeCategory(categoria, subCategorias) {
         newCat.classList.add("list-group-item");
         newCat.classList.add("list-group-item-action");
         newCat.textContent = element;
-        newCat.setAttribute("href", "#");
+        newCat.setAttribute("type", "button");
         group.appendChild(newCat);
     })
 
@@ -90,8 +90,6 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
     })
     .then(function(data) {
                 
-        let contador = 0;
-
         const container = document.getElementById('contenedorProductos');
         const row = document.createElement('div');
         row.classList.add("row");
@@ -100,16 +98,8 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
 
         data.forEach(element => {
             
-            if (contador == 0) {
-
-                const row = document.createElement('div');
-                row.classList.add("row");
-                container.appendChild(row);
-            }
             const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);
-            row.appendChild(newItem);
-            contador = contador +1;
-            if(contador == 3)  contador = 0; 
+            row.appendChild(newItem);            
             
         });
 
@@ -124,7 +114,7 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
     });
 
 fetch('http://localhost:9000/search/categories', {mode: 'cors'})
-.then(function(response) {
+    .then(function(response) {
     return response.json();
     })
     .then(function(data) {
