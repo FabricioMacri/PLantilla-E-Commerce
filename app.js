@@ -3,6 +3,7 @@
 function makeItem (id, url, categoria, nombre, descripcion, precio) {
 
     const col = document.createElement("div");
+    const link = document.createElement("a");
     const card = document.createElement("div");
     const img = document.createElement("img");
     const body = document.createElement("div");
@@ -17,10 +18,18 @@ function makeItem (id, url, categoria, nombre, descripcion, precio) {
     tittle.textContent = nombre;
     desc.textContent = descripcion;
     price.textContent = '$' + precio;
+    link.addEventListener("click", () => {
+
+        localStorage.setItem("item", id);
+
+        window.location.replace("./index.html");
+        
+    })
 
     col.classList.add("col-md-4");
     card.classList.add("card");
     card.classList.add("mb-4");
+    card.classList.add("contenedorProductos");
     body.classList.add("card-body");
     cat.classList.add("card-text");
     cat.classList.add("text-muted");
@@ -28,7 +37,8 @@ function makeItem (id, url, categoria, nombre, descripcion, precio) {
     desc.classList.add("card-text");
     price.classList.add("card-text");
 
-    col.appendChild(card);
+    col.appendChild(link);
+    link.appendChild(card);
     card.appendChild(img);
     card.appendChild(body);
     body.appendChild(cat);
@@ -114,7 +124,7 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
 
         let reference = localStorage.getItem("reference");
 
-        if (reference == undefined){
+        if (reference == "undefined"){
             data.forEach(element => {
             
                 const newItem = makeItem(element.ID, element.img, element.category, element.name, element.description, element.price);

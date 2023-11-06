@@ -53,6 +53,9 @@ async function filterCategory(category, subCategory, reference) {
         });
 }
 
+let aux = localStorage.getItem("reference");
+localStorage.setItem("reference", "undefined");
+
 const buscador = document.getElementById("buscador");
 
 const reference = document.getElementById("reference");

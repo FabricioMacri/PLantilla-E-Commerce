@@ -1,7 +1,7 @@
 
 #imageLogo {
 
-    height: 6rem;
+    height: 3rem;
 }
 
 .carousel-item {
@@ -23,5 +23,12 @@
 
     border-top-left-radius: calc(0.25rem - 1px);
     border-top-right-radius: calc(0.25rem - 1px);
+}
+
+
+.contenedorProductos:hover {
+
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+    transform: translateY(-3%);
 }
 
