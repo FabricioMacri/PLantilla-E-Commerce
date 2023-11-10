@@ -1,5 +1,5 @@
 
-async function filterCategory(category, subCategory, reference) {
+function filterCategory(category, subCategory, reference) {
 
     fetch('http://localhost:9000/items', {mode: 'cors'})
         .then(function(response) {
@@ -53,8 +53,6 @@ async function filterCategory(category, subCategory, reference) {
         });
 }
 
-let aux = localStorage.getItem("reference");
-localStorage.setItem("reference", "undefined");
 
 const buscador = document.getElementById("buscador");
 

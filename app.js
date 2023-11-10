@@ -22,7 +22,7 @@ function makeItem (id, url, categoria, nombre, descripcion, precio) {
 
         localStorage.setItem("item", id);
 
-        window.location.replace("./index.html");
+        window.location.replace("./item.html");
         
     })
 
