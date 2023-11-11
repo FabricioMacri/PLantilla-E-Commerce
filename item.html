@@ -8,19 +8,6 @@
     <link rel="stylesheet" href="./Styles.css">
 </head>
 <body>
-    
-    <!--Hacer los contenedores y en el js hacer el generador html para el producto
-    ID guardado en local storage-->
-
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
-    <title>Producto en E-commerce</title>
-</head>
-<body>
 
     <header>
         <nav class="navbar navbar-light bg-light" style="margin-bottom: 20px;">
@@ -39,10 +26,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-                <img src="./image/pc.jpg" alt="10" style="width: 26rem;">
-                
-        </div>
+        <div id="productImage" class="col-md-6"></div>
         <div class="col-md-6">
             <div class="dropdown">
                 <button style="width: 4rem; padding-right: 20px;" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,37 +80,24 @@
               </div>
             <div class="card">  
 
-                <div class="card-body">
-                    <h5 class="card-title">HP Omen 15</h5>
-                    <p class="card-text">HP OMEN i5 7th gen GTX 1050 16GB RAM</p>
-                   
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h5 class="text-muted text-decoration-line-through">$350.000</h5>
-                            
-                        </div>
-                        <div class="col-md-4">
-                            <p class="fw-bold">10% FLASH SALE</p>
-                        </div>
-                    </div>   
-
-                    <h3>$250.000</h3>
-                        
+                <div id="infoProductContainer" class="card-body">
                 
-                    <div class="col-md-6" style="margin-bottom: 20px;">
+                    <div id="contenedorFijos">
+                        <div class="col-md-6" style="margin-bottom: 20px;">
                           
-                        <img src="./image/mp.png" alt="10" style="width: 2rem;">
-                        <img src="./image/vs.png" alt="10" style="width: 2rem;">
-                        <img src="./image/mc.png" alt="10" style="width: 2rem;">
+                            <img src="./image/mp.png" alt="10" style="width: 2rem;">
+                            <img src="./image/vs.png" alt="10" style="width: 2rem;">
+                            <img src="./image/mc.png" alt="10" style="width: 2rem;">
                             
-                    </div>
-                    <p class="card-text">   
-                        <button class="btn btn-outline-secondary" id="decrementar">-</button>
-                        <span style="margin: 5px;" class="fs-5" id="cantidad"> 1 </span>
-                        <button class="btn btn-outline-secondary" id="incrementar">+</button>
-                    </p>
+                        </div>
+                        <p class="card-text">   
+                            <button class="btn btn-outline-secondary" id="decrementar">-</button>
+                            <span style="margin: 5px;" class="fs-5" id="cantidad"> 1 </span>
+                            <button class="btn btn-outline-secondary" id="incrementar">+</button>
+                        </p>
                     
-                    <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button id="agregarCarrito" class="btn btn-primary">Agregar al Carrito</button>
+                    </div>
                 </div>
             </div>
         </div>
