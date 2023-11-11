@@ -2,6 +2,16 @@ const buscadorPrincipal = document.getElementById("buscador");
 
 const referencePrincipal = document.getElementById("reference");
 
+const sumador = document.getElementById("incrementar");
+
+const restador = document.getElementById("decrementar");
+
+const cantidad = document.getElementById("cantidad");
+
+localStorage.setItem("cantidad", "1");
+
+console.log(cantidad);
+
 referencePrincipal.addEventListener("input", () => {
 
     localStorage.setItem("reference", referencePrincipal.value);
@@ -11,6 +21,28 @@ referencePrincipal.addEventListener("input", () => {
 buscadorPrincipal.addEventListener("click", () => {
 
     window.location.replace("./tienda.html");
+    
+})
+
+sumador.addEventListener("click", () => {
+
+    let aux = localStorage.getItem("cantidad");
+
+    localStorage.setItem("cantidad", parseInt(aux) + 1);
+
+    cantidad.textContent = parseInt(aux) + 1;
+    
+})
+restador.addEventListener("click", () => {
+
+    let aux = localStorage.getItem("cantidad");
+
+    if(parseInt(aux) > 1){
+
+        localStorage.setItem("cantidad", parseInt(aux) - 1);
+
+        cantidad.textContent = parseInt(aux) - 1;
+    }
     
 })
 
