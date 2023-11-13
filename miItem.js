@@ -1,3 +1,7 @@
+//HACER CARRITO EN ITEM
+//HACER CARRITO EN TIENDA Y AGREGAR PROMOS
+//MEJORAR EL HUD CON PRODUCTOS CALIENTES Y MAS PROMOS
+
 const buscadorPrincipal = document.getElementById("buscador");
 
 const referencePrincipal = document.getElementById("reference");
