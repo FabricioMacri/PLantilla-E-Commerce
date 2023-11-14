@@ -10,7 +10,6 @@ const cantidad = document.getElementById("cantidad");
 
 localStorage.setItem("cantidad", "1");
 
-console.log(cantidad);
 
 referencePrincipal.addEventListener("input", () => {
 
@@ -54,7 +53,7 @@ function getID() {
 }
 
 
-fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
+fetch('https://apirest-ecommerce.onrender.com/item/' + getID(), {mode: 'no-cors'})
     .then(function(response) {
     return response.json();
     })
