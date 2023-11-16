@@ -57,7 +57,7 @@ function getID() {
 }
 
 
-fetch('https://apirest-ecommerce.onrender.com/item/' + getID(), {mode: 'no-cors'})
+fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
