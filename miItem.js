@@ -3,17 +3,21 @@
 //MEJORAR EL HUD CON PRODUCTOS CALIENTES Y MAS PROMOS
 
 const buscadorPrincipal = document.getElementById("buscador");
-
 const referencePrincipal = document.getElementById("reference");
-
 const sumador = document.getElementById("incrementar");
-
 const restador = document.getElementById("decrementar");
-
 const cantidad = document.getElementById("cantidad");
+const carrito = document.getElementById("agregarCarrito");
 
 localStorage.setItem("cantidad", "1");
 
+carrito.addEventListener("click", () => {
+
+    makeCarritoItem(localStorage.getItem("producto"), localStorage.getItem("cantidad"))
+    const total = document.getElementById("totalCarrito");
+
+    total.textContent = "Total: $" + (localStorage.getItem("precio") * parseInt(localStorage.getItem("cantidad")))
+})
 
 referencePrincipal.addEventListener("input", () => {
 
@@ -55,9 +59,48 @@ function getID() {
 
     return reference;
 }
+/*
+<li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+        <div class="fw-bold">HP Omen</div>
+    </div>
+    <span class="badge bg-primary rounded-pill">2</span>
+</li>
+*/
+function makeCarritoItem(item, cant) {
+
+    const carrito = document.getElementById("carritoContainer");
+
+    const line = document.createElement("li");
+    const ms = document.createElement("div");
+    const fw = document.createElement("div");
+    const pill = document.createElement("span");
+
+    line.classList.add("list-group-item");
+    line.classList.add("d-flex");
+    line.classList.add("justify-content-between");
+    line.classList.add("align-items-start");
+    ms.classList.add("ms-2");
+    ms.classList.add("me-auto");
+    fw.classList.add("fw-bold");
+    pill.classList.add("badge");
+    pill.classList.add("bg-primary");
+    pill.classList.add("rounded-pill");
+
+    fw.textContent = item;
+    pill.textContent = cant;
+
+    carrito.appendChild(line);
+    line.appendChild(ms);
+    line.appendChild(pill);
+    ms.appendChild(fw);
 
 
-fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
+
+
+}
+
+fetch('http://192.168.0.15:9000/item/' + getID(), {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
@@ -66,6 +109,9 @@ fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
         //Cargo la imagen
 
         let item = data[0];
+
+        localStorage.setItem("producto", item.name);
+        localStorage.setItem("precio", item.price);
                 
         const imgContainer = document.getElementById("productImage");
 
@@ -85,12 +131,15 @@ fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
 
         const nombre = document.createElement("h5");
         const desc = document.createElement("p");
+        const precio = document.createElement("h3");
+
 
         nombre.classList.add("card-title");
         desc.classList.add("card-text");
 
         nombre.textContent = item.name;
         desc.textContent = item.description;
+        precio.textContent = "$" + item.price;
 
         container.appendChild(nombre);
         container.appendChild(desc);
@@ -104,8 +153,6 @@ fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
             const col4 = document.createElement("div");
             const deal = document.createElement("h5");
             const dealName = document.createElement("p");
-            const precio = document.createElement("h3");
-
 
             row.classList.add("row");
             col.classList.add("col-md-3");
@@ -116,20 +163,20 @@ fetch('http://localhost:9000/item/' + getID(), {mode: 'cors'})
             
             deal.textContent = "$" + item.deal;
             dealName.textContent = item.dealName;
-            precio.textContent = "$" + item.price;
 
             container.appendChild(row);
             row.appendChild(col);
             row.appendChild(col4);
             col.appendChild(deal);
             col4.appendChild(dealName);
-            container.appendChild(precio);
-
-            const medios = document.getElementById("contenedorFijos");
-            medios.remove(medios);
-            container.appendChild(medios);
        
         }
+
+        container.appendChild(precio);
+
+        const medios = document.getElementById("contenedorFijos");
+        medios.remove(medios);
+        container.appendChild(medios);
 
 
     })

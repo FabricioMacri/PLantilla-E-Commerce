@@ -1,7 +1,7 @@
 
 function filterCategory(category, subCategory, reference) {
 
-    fetch('http://localhost:9000/items', {mode: 'cors'})
+    fetch('http://192.168.0.15:9000/items', {mode: 'cors'})
         .then(function(response) {
         return response.json();
         })

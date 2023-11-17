@@ -110,7 +110,7 @@ function makeCategory(categoria, subCategorias) {
 }
 
 
-fetch('http://localhost:9000/items', {mode: 'cors'})
+fetch('http://192.168.0.15:9000/items', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
@@ -149,7 +149,7 @@ fetch('http://localhost:9000/items', {mode: 'cors'})
         console.log(error);
     });
 
-fetch('http://localhost:9000/search/categories', {mode: 'cors'})
+fetch('http://192.168.0.15:9000/search/categories', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
