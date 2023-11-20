@@ -108,13 +108,59 @@ function makeCategory(categoria, subCategorias) {
 
     return accordion;
 }
+function makeCarritoItem(item, cant) {
 
+    const carrito = document.getElementById("carritoContainer");
+
+    const line = document.createElement("li");
+    const ms = document.createElement("div");
+    const fw = document.createElement("div");
+    const pill = document.createElement("span");
+
+    line.classList.add("list-group-item");
+    line.classList.add("d-flex");
+    line.classList.add("justify-content-between");
+    line.classList.add("align-items-start");
+    ms.classList.add("ms-2");
+    ms.classList.add("me-auto");
+    fw.classList.add("fw-bold");
+    pill.classList.add("badge");
+    pill.classList.add("bg-primary");
+    pill.classList.add("rounded-pill");
+
+    fw.textContent = item;
+    pill.textContent = cant;
+
+    carrito.appendChild(line);
+    line.appendChild(ms);
+    line.appendChild(pill);
+    ms.appendChild(fw);
+}
 
 fetch('http://192.168.0.15:9000/items', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
     .then(function(data) {
+
+        let carrito = localStorage.getItem("carrito");
+
+        if (carrito != undefined) {
+
+            carrito = JSON.parse(carrito);
+            let total = 0;
+            carrito.forEach(element => {
+                
+                makeCarritoItem(element.name, element.cantidad);
+
+                const textTotal = document.getElementById("totalCarrito");
+
+                total = total + (element.price * element.cantidad);
+
+                textTotal.textContent = "Total: $" + total;
+
+            });
+        }
                 
         const container = document.getElementById('contenedorProductos');
         const row = document.createElement('div');

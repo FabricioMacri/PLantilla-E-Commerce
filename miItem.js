@@ -13,10 +13,34 @@ localStorage.setItem("cantidad", "1");
 
 carrito.addEventListener("click", () => {
 
-    makeCarritoItem(localStorage.getItem("producto"), localStorage.getItem("cantidad"))
-    const total = document.getElementById("totalCarrito");
+    let carrito = JSON.parse(localStorage.getItem("carrito"));
 
-    total.textContent = "Total: $" + (localStorage.getItem("precio") * parseInt(localStorage.getItem("cantidad")))
+    let prod = JSON.parse(localStorage.getItem("producto"));
+
+    prod.cantidad = localStorage.getItem("cantidad");
+
+    let lista = [];
+
+    let total = 0;
+
+    if (carrito != undefined){
+
+        carrito.forEach(element => {
+
+            lista.push(element);
+                
+            total = total + (element.price * element.cantidad);
+        });
+    }
+    lista.push(prod);
+
+    total = total + (prod.price * prod.cantidad)
+    const textTotal = document.getElementById("totalCarrito");
+    textTotal.textContent = "Total: $" + total;
+
+    makeCarritoItem(prod.name, prod.cantidad);
+
+    localStorage.setItem("carrito", JSON.stringify(lista));
 })
 
 referencePrincipal.addEventListener("input", () => {
@@ -59,14 +83,7 @@ function getID() {
 
     return reference;
 }
-/*
-<li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-        <div class="fw-bold">HP Omen</div>
-    </div>
-    <span class="badge bg-primary rounded-pill">2</span>
-</li>
-*/
+
 function makeCarritoItem(item, cant) {
 
     const carrito = document.getElementById("carritoContainer");
@@ -108,10 +125,34 @@ fetch('http://192.168.0.15:9000/item/' + getID(), {mode: 'cors'})
 
         //Cargo la imagen
 
+        console.log(data);
+
         let item = data[0];
 
-        localStorage.setItem("producto", item.name);
-        localStorage.setItem("precio", item.price);
+        item.cantidad = 0;
+
+        localStorage.setItem("producto", JSON.stringify(item)); 
+
+        //cargo el carrito
+
+        let carrito = localStorage.getItem("carrito");
+
+        if (carrito != undefined) {
+
+            carrito = JSON.parse(carrito);
+            let total = 0;
+            carrito.forEach(element => {
+                
+                makeCarritoItem(element.name, element.cantidad);
+
+                const textTotal = document.getElementById("totalCarrito");
+
+                total = total + (element.price * element.cantidad);
+
+                textTotal.textContent = "Total: $" + total;
+
+            });
+        }
                 
         const imgContainer = document.getElementById("productImage");
 
