@@ -34,19 +34,6 @@
             </li>
           </ul>
           <form class="d-flex">
-            <div class="btn-group" style="margin-right: 10px;">
-              <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Mis compras
-              </button>
-              <ul class="dropdown-menu">
-                <ol class="list-group">
-                  
-                </ol>
-                <li><hr class="dropdown-divider"></li>
-                <li><span class="dropdown-item-text">Total: $0</span></li>
-                <li><a class="dropdown-item list-group-item-primary" href="#">Ver pedido</a></li>
-              </ul>
-            </div>
             <input id="reference" class="form-control me-2" type="search" placeholder="¿Que estas buscando?" aria-label="Search">
             <button id="buscador" class="btn btn-outline-success" type="button">Buscar</button>
           </form>
@@ -58,55 +45,7 @@
   <div class="container mt-5">
     <h2 class="mb-4">Carrito de Compras</h2>
     <!-- Lista de productos -->
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card">
-          <div class="row">
-            <div class="col-md-6">
-              <img class="carritoImgItem" src="./image/pc.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title">HP Omen 15</h5>
-                <p class="card-text">$250000</p>
-                <button class="btn btn-danger">Eliminar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="row">
-            <div class="col-md-6">
-              <img class="carritoImgItem" src="./image/pc.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title">HP Omen 15</h5>
-                <p class="card-text">$250000</p>
-                <button class="btn btn-danger">Eliminar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="row">
-            <div class="col-md-6">
-              <img class="carritoImgItem" src="./image/pc.jpg" alt="">
-            </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title">HP Omen 15</h5>
-                <p class="card-text">$250000</p>
-                <button class="btn btn-danger">Eliminar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="carritoContainer" class="row">
     </div>  
     <!-- Información -->  
     <div class="row">  
@@ -148,7 +87,7 @@
                   <img src="./image/mc.png" alt="10" style="width: 2rem;">
                 </div>
                 <div class="mb-3">
-                  <h5 for="nombre" class="form-label">Total: $250000</h5> 
+                  <h5 id="totalCarrito" for="nombre" class="form-label"></h5> 
                 </div>
                 <button type="submit" class="btn btn-primary">Realizar Pedido</button>  
               </form>
