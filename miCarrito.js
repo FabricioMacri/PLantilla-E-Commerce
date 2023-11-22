@@ -135,7 +135,13 @@ buscadorPrincipal.addEventListener("click", () => {
     window.location.replace("./tienda.html");
     
 })
+const btncompra = document.getElementById("btncompra");
+btncompra.addEventListener("click", () => {
 
+    getlink();
+    
+    
+})
 //cargo el carrito
 
 let carrito = localStorage.getItem("carrito");
@@ -169,4 +175,52 @@ else {
 
     textTotal.textContent = "Total: $0"
     
+}
+
+function getlink (){
+    let carrito = localStorage.getItem("carrito");
+
+    let Total = 0;
+
+    if (carrito != undefined && carrito.length > 0) {
+
+        carrito = JSON.parse(carrito);
+        carrito.forEach(element => { Total = Total + (element.price * element.cantidad); });
+    }
+    let pepe = {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify({total:Total}) 
+    }
+    
+    const mensaje = {
+        total : Total
+    }
+    
+    fetch('http://192.168.0.15:9000/payment', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(mensaje) 
+    })
+    .then(response => response.json())
+    .then(function(data) {
+
+        console.log(mensaje.total);
+        console.log(data.init_point);
+
+        window.location.href = data.init_point;
+
+    })
+    .catch(function(error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Parece que hubo un problema, intente mas tarde.'
+          })
+        console.log(error);
+    });
 }
