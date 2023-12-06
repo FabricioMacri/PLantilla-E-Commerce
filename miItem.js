@@ -131,7 +131,7 @@ function makeCarritoItem(item, cant) {
 
 }
 
-fetch('http://192.168.0.15:9000/item/' + getID(), {mode: 'cors'})
+fetch('https://e-commerce-api-ocoq.onrender.com/item/' + getID(), {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })

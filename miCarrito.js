@@ -199,7 +199,7 @@ function getlink (){
         total : Total
     }
     
-    fetch('http://192.168.0.15:9000/payment', {
+    fetch('https://e-commerce-api-ocoq.onrender.com/payment', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
