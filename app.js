@@ -137,7 +137,7 @@ function makeCarritoItem(item, cant) {
     ms.appendChild(fw);
 }
 
-fetch('http://192.168.0.15:9000/items', {mode: 'cors'})
+fetch('https://e-commerce-api-ocoq.onrender.com/items', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
@@ -195,7 +195,7 @@ fetch('http://192.168.0.15:9000/items', {mode: 'cors'})
         console.log(error);
     });
 
-fetch('http://192.168.0.15:9000/search/categories', {mode: 'cors'})
+fetch('https://e-commerce-api-ocoq.onrender.com/search/categories', {mode: 'cors'})
     .then(function(response) {
     return response.json();
     })
